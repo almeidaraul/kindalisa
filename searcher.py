@@ -1,7 +1,4 @@
-import requests
-import urllib.request
-import time
-from bs4 import BeautifulSoup
+from selenium import webdriver
 
 class Searcher():
     def __init__(self, terms):
@@ -18,8 +15,11 @@ class Searcher():
             url = "https://duckduckgo.com/?t=canonical&q="\
                   "{}+blackpink&atb=v241-6__&iax=images"\
                   "&ia=images".format(t)
-            response = requests.get(url)
-
-            soup = BeautifulSoup(response.text, "html.parser")
+            
+            driver = webdriver.Firefox()
+            driver.get(url)
+            images = driver.find_elements_by_class_name("tile--img__img")
+            print("Found {} images for {}, first element is {}".format(len(images), t, images[0]))
 
 test = Searcher(['lisa', 'jennie', 'jisoo', 'rose'])
+test.get_images(3)
