@@ -1,7 +1,6 @@
-import requests
-import urllib.request
-import time
-from bs4 import BeautifulSoup
+from selenium import webdriver
+from selenium.webdriver.firefox.options import Options
+from skimage.io import imread
 
 class Searcher():
     def __init__(self, terms):
@@ -11,15 +10,29 @@ class Searcher():
 
     def get_images(self, quantity):
         """
-        for each search term, get (quantity) images from duckduckgo
+        for each search term, get the first (quantity) images from duckduckgo
         """
+        options = Options()
+        options.headless = True
+        driver = webdriver.Firefox(options=options)
         for t in self.terms:
             imgs = []
             url = "https://duckduckgo.com/?t=canonical&q="\
                   "{}+blackpink&atb=v241-6__&iax=images"\
                   "&ia=images".format(t)
-            response = requests.get(url)
+            
+            driver.get(url)
+            image_elements = []
+            while not len(image_elements):
+                image_elements = driver.find_elements_by_class_name("tile--img__img")
 
-            soup = BeautifulSoup(response.text, "html.parser")
+            images = []
+            for i in image_elements[:quantity]:
+                images.append(imread(i.get_attribute('src')))
+            self.images[t] = images
+        driver.quit()
+            
 
-test = Searcher(['lisa', 'jennie', 'jisoo', 'rose'])
+# test = Searcher(['lisa', 'jennie', 'jisoo', 'rose'])
+# test.get_images(10)
+# print(test.images)
