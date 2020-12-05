@@ -6,8 +6,8 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-beautifulsoup4 = "*"
-requests = "*"
+selenium = "*"
+scikit-image = "*"
 
 [requires]
-python_version = "3.6"
+python_version = "3.8"
