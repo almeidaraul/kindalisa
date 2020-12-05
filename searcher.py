@@ -16,10 +16,10 @@ class Searcher():
         for t in self.terms:
             imgs = []
             url = "https://duckduckgo.com/?t=canonical&q="\
-                  "{}+blackpink&atb=v241-6__&iax=images"\
+                  "{}&atb=v241-6__&iax=images"\
                   "&ia=images".format(t)
             response = requests.get(url)
 
             soup = BeautifulSoup(response.text, "html.parser")
 
-test = Searcher(['lisa', 'jennie', 'jisoo', 'rose'])
+test = Searcher(['lisa+blackpink', 'jennie+blackpink', 'jisoo+blackpink', 'rose+blackpink'])
