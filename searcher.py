@@ -18,7 +18,7 @@ class Searcher():
         for t in self.terms:
             imgs = []
             url = "https://duckduckgo.com/?t=canonical&q="\
-                  "{}+blackpink&atb=v241-6__&iax=images"\
+                  "{}&atb=v241-6__&iax=images"\
                   "&ia=images".format(t)
             
             driver.get(url)
@@ -33,6 +33,6 @@ class Searcher():
         driver.quit()
             
 
-# test = Searcher(['lisa', 'jennie', 'jisoo', 'rose'])
+# test = Searcher(['lisa+blackpink', 'jennie+blackpink', 'jisoo+blackpink', 'rose+blackpink'])
 # test.get_images(10)
 # print(test.images)
