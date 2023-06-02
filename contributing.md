@@ -1,0 +1,2 @@
+# Contributing
+Why would you?
